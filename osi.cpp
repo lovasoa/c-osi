@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <cfloat>
 #include "OsiSolverInterface.hpp"
-#include CONCAT3(coin/,SOLVER,.hpp)
+#include CONCAT(SOLVER,.hpp)
 #include "CoinPackedMatrix.hpp"
 #include "CoinPackedVector.hpp"
 #include "OsiCuts.hpp"
