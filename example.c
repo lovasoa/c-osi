@@ -36,12 +36,12 @@ int main(void) {
    double row1_rhs = 3.0;
    Osi_addRow(si, "row1", row1_nz, row1_cols, row1_coefs, '<', row1_rhs);
 
-   printf("Adding constraint row1: 2*x + y <= 3.\n");
+   printf("Adding constraint row2: 2*x + y <= 3.\n");
    int row2_nz = 2;
    int row2_cols[2] = {0, 1};
    double row2_coefs[2] = {2.0, 1.0};
    double row2_rhs = 3.0;
-   Osi_addRow(si, "row1", row2_nz, row2_cols, row2_coefs, '<', row2_rhs);
+   Osi_addRow(si, "row2", row2_nz, row2_cols, row2_coefs, '<', row2_rhs);
 
 
    printf("Here is the problem in the LP format: \n");
