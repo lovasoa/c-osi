@@ -1,5 +1,5 @@
 COINLIBS=lib/libCoinUtils.a lib/libOsi.a
-BUILD_LIB=if [[ "$@" == *.a ]]; then ar rvs $@ $^; elif [[ "$@" == *.so ]]; then $(CC) $^ -shared -o $@; else exit 1; fi
+BUILD_LIB=$(CC) $^ -shared -o $@
 CXXFLAGS+=-I ./include/coin-or/ -L ./lib
 CBC_DISTRIB='https://bintray.com/coin-or/download/download_file?file_path=Cbc-configure-update-static-xenial-linux-x86_64-gcc5.4.0.tgz'
 
