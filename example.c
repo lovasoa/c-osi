@@ -64,11 +64,10 @@ int main(void) {
          Osi_getColName(si, i, name, 255);
          printf("%s = %f\n", name, solution[i]);
       }
-
-       return 0;
    } else {
       printf("Didn't find optimal solution.\n");
       // Could then check other status functions.
-      return 1;
    }
+   Osi_deleteSolver(si);
+   return 0;
 }

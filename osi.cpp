@@ -28,6 +28,11 @@ void * Osi_newSolver() {
   return dynamic_cast<OsiSolverInterface *>(new SOLVER);
 }
 
+/** @brief Frees the memory used by the solver */
+void Osi_deleteSolver(void *osi) {
+  SOLVER *solver = (SOLVER *) osi;
+  delete solver;
+}
 
 void Osi_addRow(void *osi, const char *name, int nz,
   const int *cols, const double *coefs, char sense, double rhs)

@@ -5,6 +5,9 @@
 /** @brief Creates a new SOLVER and returns a pointer to an OsiSolverInterface object */
 void * Osi_newSolver();
 
+/** @brief Frees the memory used by the solver */
+void Osi_deleteSolver(void *osi);
+
 /** @brief Adds a constraint to the problem. */
 void Osi_addRow(void *osi, const char *name, int nz,
   const int *cols, const double *coefs, char sense, double rhs);
