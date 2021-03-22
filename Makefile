@@ -18,14 +18,17 @@ build/libosiclp.a: build/OsiClpSolverInterface.o
 build/libosicpx.a: build/OsiCpxSolverInterface.o build/OsiCpxSolverInterfaceSource.o
 	$(BUILD_LIB)
 
-build/OsiCpxSolverInterfaceSource.o: Osi/src/OsiCpx/OsiCpxSolverInterface.cpp
+build/OsiCpxSolverInterfaceSource.o: Osi/src/OsiCpx/OsiCpxSolverInterface.cpp | build
 	$(CXX) $(CXXFLAGS) -fPIC -o $@ -c $^ -I $(CPLEX_PATH)/include/ilcplex/
 
-build/OsiGlpkSolverInterfaceSource.o: Osi/src/OsiGlpk/OsiGlpkSolverInterface.cpp
+build/OsiGlpkSolverInterfaceSource.o: Osi/src/OsiGlpk/OsiGlpkSolverInterface.cpp | build
 	$(CXX) $(CXXFLAGS) -fPIC -o $@ -c $^
 
-build/%.o: osi.cpp
+build/%.o: osi.cpp | build
 	$(CXX) $(CXXFLAGS) -fPIC -o $@ -c $^ -DSOLVER="$(notdir $(basename $@))"
+
+build:
+	mkdir -p build
 
 build/example-glpk: example.c build/OsiGlpkSolverInterface.o build/OsiGlpkSolverInterfaceSource.o -lglpk  $(COINLIBS)
 	 $(CC) $(CXXFLAGS) $^ -lstdc++ -o $@
