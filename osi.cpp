@@ -11,7 +11,7 @@
 #define CONCAT(n1, n2) STRINGIFY_MACRO(EXPAND(n1)EXPAND(n2))
 #define CONCAT3(n1, n2, n3) STRINGIFY_MACRO(EXPAND(n1)EXPAND(n2)EXPAND(n3))
 
-#include <iostream>
+#include <stdio.h>
 #include <cfloat>
 #include CONCAT3(coin/,SOLVER,.hpp)
 #include "coin/CoinPackedMatrix.hpp"
@@ -72,6 +72,19 @@ void Osi_setObjCoef(void *osi, int index, double obj)
 {
   OsiSolverInterface *osis = (OsiSolverInterface *)osi;
   osis->setObjCoeff( index, obj );
+}
+
+/** @brief gets a value considered by the solver to be infinite */
+double Osi_getInfinity(void *osi) {
+  OsiSolverInterface *solver = (OsiSolverInterface *)osi;
+  return solver->getInfinity();
+}
+
+
+/** @brief Write the problem to an LP file */
+void Osi_writeLp(void *osi, FILE* fp) {
+  OsiSolverInterface *solver = (OsiSolverInterface *)osi;
+  return solver->writeLp(fp);
 }
 
 /** @brief Solves initial LP relaxation */
@@ -152,7 +165,7 @@ int Osi_getNumCols( void *osi )
   return osiSolver->getNumCols();
 }
 
-/** @brief Returns column name in OsiSolverInterface object */
+/** @brief Copies column name in OsiSolverInterface object */
 void Osi_getColName( void *osi, int i, char *name, int maxLen )
 {
   OsiSolverInterface *osiSolver = (OsiSolverInterface *) osi;

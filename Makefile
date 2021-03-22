@@ -12,6 +12,9 @@ build/libosiclp.a: build/OsiClpSolverInterface.o -lOsiClp $(COINLIBS)
 build/%.o: osi.cpp
 	$(CXX) -c $^ -DSOLVER="$(notdir $(basename $@))" $(CXXFLAGS) -o $@
 
+build/example: example.c build/libosicbc.a -lOsi -lCoinUtils -lOsiCbc
+	 $(CC) $^ -lstdc++ -o $@
+
 clean:
 	rm *.a build/*
 
