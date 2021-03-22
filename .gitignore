@@ -1,6 +1,6 @@
-build/*
 bin/
 include/
 share/
 lib/
 AUTHORS
+.idea
