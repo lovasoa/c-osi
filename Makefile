@@ -1,21 +1,22 @@
 COINLIBS=-lOsi -lCoinUtils
+BUILD_LIB=if [[ "$@" == *.a ]]; then ar rvs $@ $^; elif [[ "$@" == *.so ]]; then $(CC) $^ -shared -o $@; else exit 1; fi
 
-build/libosicbc.a: build/OsiCbcSolverInterface.o -lOsiCbc $(COINLIBS)
-	ar rvs $@ $^
+build/libosiglpk.so: build/OsiGlpkSolverInterface.o -lOsiGlpk $(COINLIBS)
+	$(BUILD_LIB)
 
-build/libosiglpk.a: build/OsiGlpkSolverInterface.o -lOsiGlpk $(COINLIBS)
-	ar rvs $@ $^
+build/libosicbc.so: build/OsiCbcSolverInterface.o -lOsiCbc $(COINLIBS)
+	$(BUILD_LIB)
 
-build/libosiclp.a: build/OsiClpSolverInterface.o -lOsiClp $(COINLIBS)
-	ar rvs $@ $^
+build/libosiclp.so: build/OsiClpSolverInterface.o -lOsiClp $(COINLIBS)
+	$(BUILD_LIB)
 
 build/%.o: osi.cpp
-	$(CXX) -c $^ -DSOLVER="$(notdir $(basename $@))" $(CXXFLAGS) -o $@
+	$(CXX) -c $^ -DSOLVER="$(notdir $(basename $@))" $(CXXFLAGS) -fPIC -o $@
 
-build/example: example.c build/libosicbc.a -lOsi -lCoinUtils -lOsiCbc
-	 $(CC) $^ -lstdc++ -o $@
+build/example: example.c build/libosicbc.so
+	 $(CC) $^ -O3 -lstdc++ -o $@
 
 clean:
-	rm *.a build/*
+	rm build/*
 
-all: build/libosiglpk.a build/libosicbc.a build/libosiclp.a
+all: build/example build/libosiglpk.a build/libosicbc.a build/libosiclp.a

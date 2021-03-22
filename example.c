@@ -7,7 +7,7 @@ int main(void) {
    printf("Creating an OSI solver instance.\n");
    void* si = Osi_newSolver();
 
-   // Maximize x + y
+   // Maximize x + 2*y
 
    //Define the variable lower/upper bounds.
    // x0 >= 0   =>  0 <= x0 <= infinity
@@ -22,7 +22,7 @@ int main(void) {
    printf("Adding variable y >= 0.\n");
    double y_lower_bound = 0.0;
    double y_upper_bound = Osi_getInfinity(si);
-   double y_objective_coef = 1.0;
+   double y_objective_coef = 2.0;
    char y_is_integer = 0;
    Osi_addCol(si, "y", y_lower_bound, y_upper_bound, y_objective_coef, y_is_integer, 0, 0, 0);
 
@@ -36,12 +36,12 @@ int main(void) {
    double row1_rhs = 3.0;
    Osi_addRow(si, "row1", row1_nz, row1_cols, row1_coefs, '<', row1_rhs);
 
-   printf("Adding constraint row2: 2*x + y <= 3.\n");
+   printf("Adding constraint row2: y - x >= 0.\n");
    int row2_nz = 2;
-   int row2_cols[2] = {0, 1};
-   double row2_coefs[2] = {2.0, 1.0};
-   double row2_rhs = 3.0;
-   Osi_addRow(si, "row2", row2_nz, row2_cols, row2_coefs, '<', row2_rhs);
+   int row2_cols[2] = {1, 0};
+   double row2_coefs[2] = {1.0, -1.0};
+   double row2_rhs = 0.0;
+   Osi_addRow(si, "row2", row2_nz, row2_cols, row2_coefs, '>', row2_rhs);
 
 
    printf("Here is the problem in the LP format: \n");
@@ -62,7 +62,7 @@ int main(void) {
       for( int i = 0; i < n; ++i ) {
          char name[255];
          Osi_getColName(si, i, name, 255);
-         printf("%s = %f\n", name, solution[i]);
+         printf("%s = %.2f\n", name, solution[i]);
       }
    } else {
       printf("Didn't find optimal solution.\n");
