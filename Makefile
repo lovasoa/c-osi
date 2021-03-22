@@ -4,7 +4,7 @@ CXXFLAGS+=-I ./include/coin-or/ -L ./lib
 CBC_DISTRIB='https://bintray.com/coin-or/download/download_file?file_path=Cbc-configure-update-static-xenial-linux-x86_64-gcc5.4.0.tgz'
 
 include/% lib/%:
-	curl --location $(CBC_DISTRIB) | tar xvzf -
+	curl --location $(CBC_DISTRIB) | tar --skip-old-files -xvzf -
 
 build/libosiglpk.so: build/OsiGlpkSolverInterface.o lib/libOsiGlpk.a $(COINLIBS)
 	$(BUILD_LIB)
