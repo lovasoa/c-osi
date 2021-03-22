@@ -30,7 +30,7 @@ build/%.o: osi.cpp | build
 build:
 	mkdir -p build
 
-build/example-glpk: example.c build/OsiGlpkSolverInterface.o build/OsiGlpkSolverInterfaceSource.o -lglpk  $(COINLIBS)
+build/example-glpk: example.c build/libosiglpk.a -lglpk  $(COINLIBS)
 	 $(CC) $(CXXFLAGS) $^ -lstdc++ -o $@
 
 build/example-cplex: example.c build/libosicpx.a $(COINLIBS)
