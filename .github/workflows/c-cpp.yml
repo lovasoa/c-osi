@@ -20,3 +20,7 @@ jobs:
       run: make build/example-glpk
     - name: run
       run: ./build/example-glpk
+    - uses: actions/upload-artifact@v2
+      with:
+        name: libosiglpk.a
+        path: build/libosiglpk.a
