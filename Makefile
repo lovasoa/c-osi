@@ -2,6 +2,7 @@ COINLIBS=-lOsi -lCoinUtils
 BUILD_LIB=ar rcs $@ $^
 CPLEX_PATH=~/Downloads/cplex/cplex
 CXXFLAGS+=-I "Osi/src/OsiCpx/"
+CXXFLAGS+=-I "Osi/src/OsiGlpk/"
 CXXFLAGS+=-I "/usr/include/coin/"
 CXXFLAGS+=-L $(CPLEX_PATH)/lib/x86-64_linux/static_pic/
 
