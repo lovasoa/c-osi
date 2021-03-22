@@ -1,24 +1,19 @@
-COINLIBS=lib/libCoinUtils.a lib/libOsi.a
-BUILD_LIB=$(CC) $^ -shared -o $@
-CXXFLAGS+=-I ./include/coin-or/ -L ./lib
-CBC_DISTRIB='https://bintray.com/coin-or/download/download_file?file_path=Cbc-configure-update-static-xenial-linux-x86_64-gcc5.4.0.tgz'
+COINLIBS=-lOsi -lCoinUtils
+BUILD_LIB=ar rcs $@ $^
 
-include/% lib/%:
-	curl --location $(CBC_DISTRIB) | tar --skip-old-files -xvzf -
-
-build/libosiglpk.so: build/OsiGlpkSolverInterface.o lib/libOsiGlpk.a $(COINLIBS)
+build/libosiglpk.a: build/OsiGlpkSolverInterface.o
 	$(BUILD_LIB)
 
-build/libosicbc.so: $(COINLIBS) lib/libOsiCbc.a build/OsiCbcSolverInterface.o
+build/libosicbc.a: build/OsiCbcSolverInterface.o
 	$(BUILD_LIB)
 
-build/libosiclp.so: build/OsiClpSolverInterface.o -lOsiClp $(COINLIBS)
+build/libosiclp.a: build/OsiClpSolverInterface.o
 	$(BUILD_LIB)
 
-build/%.o: osi.cpp | include/
-	$(CXX) -c $^ -DSOLVER="$(notdir $(basename $@))" $(CXXFLAGS) -fPIC -o $@
+build/%.o: osi.cpp
+	$(CXX) $(CXXFLAGS) -fPIC -o $@ -c $^ -DSOLVER="$(notdir $(basename $@))"
 
-build/example: example.c build/libosicbc.so
+build/example: example.c build/libosiglpk.a -lOsiGlpk $(COINLIBS)
 	 $(CC) $^ -lstdc++ -o $@
 
 clean:

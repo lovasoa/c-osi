@@ -13,12 +13,12 @@
 
 #include <stdio.h>
 #include <cfloat>
-#include "OsiSolverInterface.hpp"
-#include CONCAT(SOLVER,.hpp)
-#include "CoinPackedMatrix.hpp"
-#include "CoinPackedVector.hpp"
-#include "OsiCuts.hpp"
-#include "OsiBranchingObject.hpp"
+#include "coin/OsiSolverInterface.hpp"
+#include CONCAT3(coin/,SOLVER,.hpp)
+#include "coin/CoinPackedMatrix.hpp"
+#include "coin/CoinPackedVector.hpp"
+#include "coin/OsiCuts.hpp"
+#include "coin/OsiBranchingObject.hpp"
 
 // Originally from https://github.com/coin-or/Cbc/blob/713a373/src/Cbc_C_Interface.cpp
 
