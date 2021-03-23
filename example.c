@@ -36,19 +36,31 @@ int main(void) {
    double row1_rhs = 3.0;
    Osi_addRow(si, "row1", row1_nz, row1_cols, row1_coefs, '<', row1_rhs);
 
-   printf("Adding constraint row2: y - x >= 0.\n");
+   printf("Adding constraint row2: x - y >= 0.\n");
    int row2_nz = 2;
-   int row2_cols[2] = {1, 0};
+   int row2_cols[2] = {0, 1};
    double row2_coefs[2] = {1.0, -1.0};
    double row2_rhs = 0.0;
    Osi_addRow(si, "row2", row2_nz, row2_cols, row2_coefs, '>', row2_rhs);
 
+   printf("Adding an SOS constraint to have either x=0 or y=0\n");
+   int sosNumMembers = 2; // Number of variables
+   const int sosColumns[2] = {0, 1};
+   const double sosWeights[2] = {1.0, 2.0};
+   const int sosType = 1;
+   Osi_addSos(si, sosNumMembers, sosColumns, sosWeights, sosType);
 
    printf("Here is the problem in the LP format: \n");
    Osi_writeLp(si, stdout);
 
-   // Solve the (relaxation of the) problem
+   printf("Solving the linear relaxation of the problem \n");
    Osi_initialSolve(si);
+
+   const double* initialSolution = Osi_getColSolution(si);
+   printf("Initial solution: x=%.2f y=%.2f\n", initialSolution[0], initialSolution[1]);
+
+   printf("Running branch and bound\n");
+   Osi_branchAndBound(si);
 
    // Check the solution
    if ( Osi_isProvenOptimal(si) ) {

@@ -18,6 +18,10 @@ This has two main advantages:
    [C Foreign Function Interface](https://en.wikipedia.org/wiki/Foreign_function_interface),
    such as Java, Go, Python, Rust, and many others.
    
+## Usage
+
+For an usage example, see [`example.c`](./example.c).
+
 ## Downloads
 
 You can download pre-compiled dynamic solver libraries for linux
