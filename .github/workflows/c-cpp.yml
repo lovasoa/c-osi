@@ -17,10 +17,10 @@ jobs:
         submodules: recursive
     - run: ./install-dependencies.sh
     - name: make
-      run: make build/example-glpk
+      run: make build/example
     - name: run
-      run: ./build/example-glpk
+      run: ./build/example
     - uses: actions/upload-artifact@v2
       with:
         name: libosiglpk.a
-        path: build/libosiglpk.a
+        path: build/libosiglpk.so
