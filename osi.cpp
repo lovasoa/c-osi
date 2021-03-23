@@ -29,6 +29,11 @@ void * Osi_newSolver() {
   return dynamic_cast<OsiSolverInterface *>(new SOLVER);
 }
 
+/** @brief gets the name of the solver in use */
+const char * Osi_getSolverName() {
+  return STRINGIFY_MACRO(SOLVER);
+}
+
 /** @brief Frees the memory used by the solver */
 void Osi_deleteSolver(void *osi) {
   SOLVER *solver = (SOLVER *) osi;

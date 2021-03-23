@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 int main(void) {
-   printf("Creating an OSI solver instance.\n");
+   printf("Creating an OSI solver instance of type %s.\n", Osi_getSolverName());
    void* si = Osi_newSolver();
 
    // Maximize x + 2*y

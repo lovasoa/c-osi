@@ -1,3 +1,6 @@
 [submodule "Osi"]
 	path = Osi
 	url = git@github.com:coin-or/Osi.git
+[submodule "CoinUtils"]
+	path = CoinUtils
+	url = git@github.com:coin-or/CoinUtils.git

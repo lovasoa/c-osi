@@ -5,6 +5,9 @@
 /** @brief Creates a new SOLVER and returns a pointer to an OsiSolverInterface object */
 void * Osi_newSolver();
 
+/** @brief get the name of the current solver */
+const char * Osi_getSolverName();
+
 /** @brief Frees the memory used by the solver */
 void Osi_deleteSolver(void *osi);
 
