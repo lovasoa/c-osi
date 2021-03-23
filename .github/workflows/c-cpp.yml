@@ -22,5 +22,5 @@ jobs:
       run: ./build/example
     - uses: actions/upload-artifact@v2
       with:
-        name: libosiglpk.a
+        name: libosiglpk.so
         path: build/libosiglpk.so
