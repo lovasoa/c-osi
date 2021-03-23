@@ -17,3 +17,9 @@ This has two main advantages:
    the solvers from any language that has a
    [C Foreign Function Interface](https://en.wikipedia.org/wiki/Foreign_function_interface),
    such as Java, Go, Python, Rust, and many others.
+   
+## Downloads
+
+You can download pre-compiled dynamic solver libraries for linux
+from the 
+[release page](https://github.com/lovasoa/c-osi/releases).

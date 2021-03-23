@@ -43,4 +43,4 @@ build/example: example.c build/libosi.so
 clean:
 	rm -r build/*
 
-all: build/example build/libosiglpk.so build/libosicbc.so build/libosiclp.so
+all: build/example build/libosiglpk.so
