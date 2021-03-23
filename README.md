@@ -14,4 +14,6 @@ This has two main advantages:
    Osi is defined as a C++ abstract class,
    and this makes it hard to interact with it from languages other than C++.
    Having a single dynamic library with a plain C interface makes it possible to use 
-   the solvers from any language that has a C ffi, such as Java, Go, Python, Rust, and many others.
+   the solvers from any language that has a
+   [C Foreign Function Interface](https://en.wikipedia.org/wiki/Foreign_function_interface),
+   such as Java, Go, Python, Rust, and many others.
