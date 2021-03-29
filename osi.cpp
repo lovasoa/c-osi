@@ -1,5 +1,6 @@
-// Example of using COIN-OR OSI, building the instance internally
-// with sparse matrix object
+// Copyright (C) 2004, International Business Machines
+// Corporation and others.  All Rights Reserved.
+// This code is licensed under the terms of the Eclipse Public License (EPL).
 
 #ifndef SOLVER
 #define SOLVER OsiCbcSolverInterface
